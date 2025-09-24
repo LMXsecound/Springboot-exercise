@@ -9,6 +9,8 @@ import org.example.service.ClazzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 班级管理控制器
  * 分页查询接口返回数据格式:
@@ -90,5 +92,25 @@ public class ClazzController {
         Clazz clazz = clazzService.getById(id);
         return Result.success(clazz);
     }
+    
+    /**
+     * 更新班级信息
+     * @param id 班级ID
+     * @param clazz 更新的班级信息
+     * @return 更新结果
+     */
+    @PutMapping("/{id}")
+    public Result update(@PathVariable Integer id, @RequestBody Clazz clazz) {
+        log.info("更新班级, id: {}, clazz: {}", id, clazz);
+        clazz.setId(id);
+        clazzService.update(clazz);
+        return Result.success();
+    }
 
+    @GetMapping("/list")
+    public Result list() {
+        log.info("查询所有班级");
+        List<Clazz> clazzList = clazzService.findAll();
+        return Result.success(clazzList);
+    }
 }

@@ -19,4 +19,8 @@ public interface ClazzMapper {
     List<Clazz> getByName(String name);
 
     Clazz getById(Integer id);
+    
+    void update(Clazz clazz);
+
+    List<Clazz> findAll();
 }

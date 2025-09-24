@@ -85,4 +85,36 @@ public class ClazzServiceImpl implements ClazzService {
         return clazzMapper.getById(id);
 
     }
+    
+    @Transactional
+    @Override
+    public void update(Clazz clazz) {
+        // 检查必填字段
+        if (clazz.getName() == null || clazz.getName().isEmpty()) {
+            throw new IllegalArgumentException("班级名称不能为空");
+        }
+        if (clazz.getRoom() == null || clazz.getRoom().isEmpty()) {
+            throw new IllegalArgumentException("班级教室不能为空");
+        }
+        if (clazz.getBeginDate() == null) {
+            throw new IllegalArgumentException("开课时间不能为空");
+        }
+        if (clazz.getEndDate() == null) {
+            throw new IllegalArgumentException("结课时间不能为空");
+        }
+        
+        // 检查日期逻辑
+        if (clazz.getBeginDate().isAfter(clazz.getEndDate())) {
+            throw new IllegalArgumentException("开课时间不能晚于结课时间");
+        }
+        
+        clazz.setUpdateTime(LocalDateTime.now());
+        
+        clazzMapper.update(clazz);
+    }
+
+    @Override
+    public List<Clazz> findAll() {
+        return clazzMapper.findAll();
+    }
 }
