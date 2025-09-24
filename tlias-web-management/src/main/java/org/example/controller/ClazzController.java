@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 班级管理控制器
- * 
  * 分页查询接口返回数据格式:
  * {
  *   "code": 1,           // 响应码, 1 成功 , 0 失败
@@ -55,4 +54,5 @@ public class ClazzController {
         PageResult pageResult = clazzService.page(clazzQueryParam);
         return Result.success(pageResult);
     }
+
 }
