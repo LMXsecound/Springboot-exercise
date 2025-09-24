@@ -1,14 +1,13 @@
 package org.example.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.pojo.Clazz;
 import org.example.pojo.ClazzQueryParam;
 import org.example.pojo.PageResult;
 import org.example.pojo.Result;
 import org.example.service.ClazzService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 班级管理控制器
@@ -53,6 +52,20 @@ public class ClazzController {
         log.info("查询请求参数： {}", clazzQueryParam);
         PageResult pageResult = clazzService.page(clazzQueryParam);
         return Result.success(pageResult);
+    }
+
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable Integer id) {
+        log.info("删除班级, id: {}", id);
+        clazzService.deleteById(id);
+        return Result.success();
+    }
+
+    @PostMapping
+    public Result save(@RequestBody Clazz clazz) {
+        log.info("新增班级, clazz: {}", clazz);
+        clazzService.save(clazz);
+        return Result.success();
     }
 
 }
