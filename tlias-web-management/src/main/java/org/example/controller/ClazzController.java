@@ -54,6 +54,11 @@ public class ClazzController {
         return Result.success(pageResult);
     }
 
+    /**
+     * 根据ID删除班级
+     * @param id 班级ID
+     * @return 删除结果
+     */
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
         log.info("删除班级, id: {}", id);
@@ -61,11 +66,29 @@ public class ClazzController {
         return Result.success();
     }
 
+
+    /**
+     * 新增班级
+     * @param clazz 新增的班级信息
+     * @return 新增结果
+     */
     @PostMapping
     public Result save(@RequestBody Clazz clazz) {
         log.info("新增班级, clazz: {}", clazz);
         clazzService.save(clazz);
         return Result.success();
+    }
+
+    /**
+     * 根据id 查询班级
+     * @param id
+     * @return 修改结果
+     */
+    @GetMapping("/{id}")
+    public Result getById(@PathVariable Integer id) {
+        log.info("查询班级, id: {}", id);
+        Clazz clazz = clazzService.getById(id);
+        return Result.success(clazz);
     }
 
 }

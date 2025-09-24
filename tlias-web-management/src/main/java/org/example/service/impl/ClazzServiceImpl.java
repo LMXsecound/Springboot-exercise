@@ -62,6 +62,12 @@ public class ClazzServiceImpl implements ClazzService {
             throw new IllegalArgumentException("学科不能为空");
         }
         
+        // 检查班级名称是否已存在
+        List<Clazz> existingClazzList = clazzMapper.getByName(clazz.getName());
+        if (!existingClazzList.isEmpty()) {
+            throw new IllegalArgumentException("班级名称已存在");
+        }
+        
         // 检查日期逻辑
         if (clazz.getBeginDate().isAfter(clazz.getEndDate())) {
             throw new IllegalArgumentException("开课时间不能晚于结课时间");
@@ -71,6 +77,12 @@ public class ClazzServiceImpl implements ClazzService {
         clazz.setUpdateTime(LocalDateTime.now());
 
         clazzMapper.Insert(clazz);
+
+    }
+
+    @Override
+    public Clazz getById(Integer id) {
+        return clazzMapper.getById(id);
 
     }
 }

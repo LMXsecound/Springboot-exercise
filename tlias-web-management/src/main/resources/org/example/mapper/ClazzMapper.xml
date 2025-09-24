@@ -32,5 +32,15 @@
     <insert id="Insert">
         INSERT INTO clazz(name, room, begin_date, end_date, master_id, subject, create_time, update_time) VALUES (#{name}, #{room}, #{beginDate}, #{endDate}, #{masterId}, #{subject}, #{createTime}, #{updateTime})
     </insert>
+    
+    <select id="getByName" resultType="org.example.pojo.Clazz">
+        SELECT * FROM clazz WHERE name = #{name}
+    </select>
+
+    <select id="getById" resultType="org.example.pojo.Clazz">
+        SELECT * FROM clazz WHERE id = #{id}
+    </select>
+
+
 
 </mapper>

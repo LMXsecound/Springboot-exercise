@@ -14,4 +14,9 @@ public interface ClazzMapper {
     int deleteById(Integer id);
 
     void Insert(Clazz clazz);
+    
+    // 根据名称查询班级
+    List<Clazz> getByName(String name);
+
+    Clazz getById(Integer id);
 }
