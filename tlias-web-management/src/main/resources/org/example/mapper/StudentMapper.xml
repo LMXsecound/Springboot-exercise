@@ -24,5 +24,10 @@
             and name like concat('%',#{name},'%')
         </if>
     </select>
-
+    <delete id="deleteByIds">
+        delete from student where id in
+        <foreach item="id" collection="list" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
