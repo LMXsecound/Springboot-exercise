@@ -10,6 +10,7 @@ import org.example.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -30,5 +31,32 @@ public class StudentServiceImpl implements StudentService {
     public void deleteByIds(List<Integer> ids) {
         studentMapper.deleteByIds(ids);
 
+    }
+
+    @Override
+    public void save(Student student){
+        // 数据校验
+        if (student.getName() == null || student.getName().isEmpty()) {
+            throw new IllegalArgumentException("姓名不能为空");
+        }
+        if (student.getNo() == null || student.getNo().isEmpty()) {
+            throw new IllegalArgumentException("学号不能为空");
+        }
+        if (student.getGender() == null) {
+            throw new IllegalArgumentException("性别不能为空");
+        }
+        if (student.getPhone() == null || student.getPhone().isEmpty()) {
+            throw new IllegalArgumentException("手机号不能为空");
+        }
+        if (student.getDegree() == null) {
+            throw new IllegalArgumentException("学历不能为空");
+        }
+        if (student.getClazzId() == null) {
+            throw new IllegalArgumentException("班级ID不能为空");
+        }
+        
+        student.setCreateTime(LocalDateTime.now());
+        student.setUpdateTime(LocalDateTime.now());
+        studentMapper.Insert(student);
     }
 }

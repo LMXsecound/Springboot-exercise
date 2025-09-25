@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class Student {
     private Integer id; //ID
     private String name; //姓名
-    private String no; //序号
+    private String no; //学号
     private Integer gender; //性别 , 1: 男 , 2 : 女
     private String phone; //手机号
     private String idCard; //身份证号

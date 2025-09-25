@@ -30,4 +30,5 @@
             #{id}
         </foreach>
     </delete>
+
 </mapper>
