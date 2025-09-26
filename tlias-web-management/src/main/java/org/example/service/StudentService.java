@@ -13,4 +13,10 @@ public interface StudentService {
     void deleteByIds(List<Integer> ids);
 
     void save(Student student);
+
+    Student getById(Integer id);
+
+    void update(Student student);
+
+    void updateViolation(Integer id, Integer score);
 }

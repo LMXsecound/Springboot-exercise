@@ -42,7 +42,7 @@ public class StudentServiceImpl implements StudentService {
         if (student.getNo() == null || student.getNo().isEmpty()) {
             throw new IllegalArgumentException("学号不能为空");
         }
-        if (student.getGender() == null) {
+        if (student.getGender() == null || student.getGender().isEmpty()) {
             throw new IllegalArgumentException("性别不能为空");
         }
         if (student.getPhone() == null || student.getPhone().isEmpty()) {
@@ -57,6 +57,45 @@ public class StudentServiceImpl implements StudentService {
         
         student.setCreateTime(LocalDateTime.now());
         student.setUpdateTime(LocalDateTime.now());
-        studentMapper.Insert(student);
+        studentMapper.insert(student);
+    }
+
+    @Override
+    public Student getById(Integer id){
+        return studentMapper.getById(id);
+    }
+
+    @Override
+    public void update(Student student){
+        // 数据校验
+        if (student.getId() == null) {
+            throw new IllegalArgumentException("学生ID不能为空");
+        }
+        if (student.getName() == null || student.getName().isEmpty()) {
+            throw new IllegalArgumentException("姓名不能为空");
+        }
+        if (student.getNo() == null || student.getNo().isEmpty()) {
+            throw new IllegalArgumentException("学号不能为空");
+        }
+        if (student.getGender() == null || student.getGender().isEmpty()) {
+            throw new IllegalArgumentException("性别不能为空");
+        }
+        if (student.getPhone() == null || student.getPhone().isEmpty()) {
+            throw new IllegalArgumentException("手机号不能为空");
+        }
+        if (student.getDegree() == null) {
+            throw new IllegalArgumentException("学历不能为空");
+        }
+        if (student.getClazzId() == null) {
+            throw new IllegalArgumentException("班级ID不能为空");
+        }
+        
+        student.setUpdateTime(LocalDateTime.now());
+        studentMapper.update(student);
+    }
+
+    @Override
+    public void updateViolation(Integer id, Integer score){
+        studentMapper.updateViolation(id, score, LocalDateTime.now());
     }
 }
