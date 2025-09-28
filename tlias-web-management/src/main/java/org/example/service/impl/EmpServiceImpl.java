@@ -4,10 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.example.mapper.EmpExprMapper;
 import org.example.mapper.EmpMapper;
-import org.example.pojo.Emp;
-import org.example.pojo.EmpExpr;
-import org.example.pojo.EmpQueryParam;
-import org.example.pojo.PageResult;
+import org.example.pojo.*;
 import org.example.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -104,5 +101,15 @@ public class EmpServiceImpl implements EmpService {
             exprList.forEach(empExpr -> empExpr.setEmpId(empId));
             empExprMapper.insertBatch(exprList);
         }
+    }
+
+    @Override
+    public LoginInfo login(Emp emp) {
+        Emp empLogin = empMapper.getUsernameAndPassword(emp);
+        if(empLogin != null){
+            LoginInfo loginInfo = new LoginInfo(empLogin.getId(), empLogin.getUsername(), empLogin.getName(), null);
+            return loginInfo;
+        }
+        return null;
     }
 }
